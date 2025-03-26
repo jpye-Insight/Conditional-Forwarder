@@ -3,7 +3,7 @@ Starting script to create New Conditional Forwarder zones in DNS servers.
 
 "@
 
-$MasterServer = "ADDIPS"
+$AzureDCs = "ADDIPS"
 $DNSzones = import-csv c:\temp\AzureprivateDnsZones.csv
 
 
@@ -14,7 +14,7 @@ foreach($PrivateDNSzone in $DNSzones){
     }
 
     write-host "Creating new Conditional Forwarder zone for"$PrivateDNSzone.NAME
-    Add-DnsServerConditionalForwarderZone -Name $PrivateDNSzone.NAME -ReplicationScope "Forest" -MasterServers $MasterServer
+    Add-DnsServerConditionalForwarderZone -Name $PrivateDNSzone.NAME -ReplicationScope "Forest" -MasterServers $AzureDCs
     Add-DnsServerConditionalForwarderZone -Name $PrivateDNSzone.NAME -MasterServers "168.63.129.16"
 
 }
